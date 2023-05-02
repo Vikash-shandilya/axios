@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+
+    <script>
+       
+        //to add element to screen
+    function bar() {
+        
+
+        console.log('started');
+
+        const name1 = document.getElementById('name').value;
+        const email1 = document.getElementById('email').value;
+        const phone = document.getElementById('phone_no').value;
+
+        
+        console.log(name1,email1,phone)
+        myobj = {
+            name1,
+            email1,
+            phone
+        };
+        console.log(myobj);
+
+            //localStorage.setItem(pp, JSON.stringify(myobj));
+        axios.post('https://crudcrud.com/api/49a5697aa0584c5c9963fa21d697dd25/db',myobj
+                
+            
+            ).then(res=>{
+                console.log(res.data)
+                let newdiv = document.createElement('div');
+            let newli = document.createElement('li');
+            let delete_btn=document.createElement('button')
+
+            let edit_btn=document.createElement('button')
+            edit_btn.type='submit'
+            edit_btn.textContent='edit'
+            edit_btn.onclick=ll;
+            delete_btn.onclick=ss;
+            delete_btn.type='submit'
+            delete_btn.textContent='delete';
+            newli.textContent = `name is ${myobj.name} and email is ${myobj.email} and phone is ${myobj.phone}`;
+            newli.appendChild(delete_btn)
+            newli.appendChild(edit_btn)
+            newdiv.appendChild(newli);
+            
+
+            document.body.appendChild(newdiv);
+             })
+            .catch((err)=>{console.log(err)})
+            console.log('its done')
+
+            
+  
+}
+
+function ss(e)//to delete file
+{   
+    
+    e.preventDefault()
+    let item=e.target.parentElement
+    let newobj = item.cloneNode(true); // clone the li element to remove the delete button
+    newobj.removeChild(newobj.lastChild)
+    let dl=JSON.parse(newobj.textContent)
+    console.log(dl);
+    item.remove()
+    localStorage.removeItem(dl.email)
+}
+
+function ll(e)//to update element
+{
+    e.preventDefault()
+    let item=e.target.parentElement
+    let newobj = item.cloneNode(true); // clone the li element to remove the delete button
+    newobj.removeChild(newobj.lastChild)
+    newobj.removeChild(newobj.lastChild)
+    let dl=JSON.parse(newobj.textContent)
+    console.log(dl);
+
+    const lname=document.getElementById('name')
+    const lemail=document.getElementById('email')
+    const lphone=document.getElementById('phone_no')
+
+    lname.value=dl.name
+    lemail.value=dl.email
+    lphone.value=dl.phone
+    item.remove()
+    localStorage.removeItem(dl.email)
+}
+
+// document.addEventListener('DOMContentLoaded', function() {
+//   const form = document.querySelector('form');
+//   form.addEventListener('submit', bar);
+  
+// });
+
+            
+            
+        
+        
+        
+    </script>
+</head>
+
+<body>
+    <form action="" onsubmit="event.preventDefault(),bar()">
+        <label for="name"> name</label>
+        <input type="text" id="name">
+        <label for="email">email</label>
+        <input type="text" id="email">
+        <label for="phone_no">phone number</label>
+        <input type="text" id="phone_no">
+
+        <button type="submit" >submit</button>
+
+    </form>
+    
+</body>
+</html>
