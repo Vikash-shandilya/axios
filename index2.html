@@ -8,6 +8,42 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 
     <script>
+
+    //     window.addEventListener('DomContentLoaded',()=>
+    //     {
+    //         axios.get('https://crudcrud.com/api/49a5697aa0584c5c9963fa21d697dd25/db')
+    //         .then((response)=>{
+    //             console.log(response.data)
+    //             for(let i=0;i<response.data.length;i++)
+    //             {
+    //                 let newdiv = document.createElement('div');
+    //                 let newli = document.createElement('li');
+    //                 let delete_btn=document.createElement('button')
+
+    //                 let edit_btn=document.createElement('button')
+    //                 edit_btn.type='submit'
+    //                 edit_btn.textContent='edit'
+    //                 edit_btn.onclick=ll;
+    //                 delete_btn.onclick=ss;
+    //                 delete_btn.type='submit'
+    //                 delete_btn.textContent='delete';
+                    
+    //                 newli.textContent = `name is ${response.data[i].name1} and email is ${response.data[i].email1} and phone is ${response.data[i].phone}`;
+                    
+                    
+                    
+    //                 newli.appendChild(delete_btn)
+    //                 newli.appendChild(edit_btn)
+    //                 newdiv.appendChild(newli);
+            
+
+    //                 document.body.appendChild(newdiv);
+
+    //             }
+
+    //     })
+    // }
+    //     )
        
         //to add element to screen
     function bar() {
@@ -33,8 +69,8 @@
                 
             
         ).then(res=>{
-                console.log(res.data)
-                let newdiv = document.createElement('div');
+                
+            let newdiv = document.createElement('div');
             let newli = document.createElement('li');
             let delete_btn=document.createElement('button')
 
@@ -45,7 +81,11 @@
             delete_btn.onclick=ss;
             delete_btn.type='submit'
             delete_btn.textContent='delete';
-            newli.textContent = `name is ${myobj.name} and email is ${myobj.email} and phone is ${myobj.phone}`;
+            
+            newli.textContent = `name is ${res.name1} and email is ${res.email1} and phone is ${res.phone}`;
+            
+            
+            
             newli.appendChild(delete_btn)
             newli.appendChild(edit_btn)
             newdiv.appendChild(newli);
@@ -101,7 +141,41 @@ function ll(e)//to update element
 // });
 
             
+              window.addEventListener('DOMContentLoaded',()=>
+        {
+            axios.get('https://crudcrud.com/api/49a5697aa0584c5c9963fa21d697dd25/db')
+            .then((response)=>{
+                console.log(response.data)
+                for(let i=0;i<response.data.length;i++)
+                {
+                    let newdiv = document.createElement('div');
+                    let newli = document.createElement('li');
+                    let delete_btn=document.createElement('button')
+
+                    let edit_btn=document.createElement('button')
+                    edit_btn.type='submit'
+                    edit_btn.textContent='edit'
+                    edit_btn.onclick=ll;
+                    delete_btn.onclick=ss;
+                    delete_btn.type='submit'
+                    delete_btn.textContent='delete';
+                    
+                    newli.textContent = `name is ${response.data[i].name1} and email is ${response.data[i].email1} and phone is ${response.data[i].phone}`;
+                    
+                    
+                    
+                    newli.appendChild(delete_btn)
+                    newli.appendChild(edit_btn)
+                    newdiv.appendChild(newli);
             
+
+                    document.body.appendChild(newdiv);
+
+                }
+
+        })
+    }
+        )  
         
         
         
