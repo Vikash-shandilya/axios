@@ -46,6 +46,7 @@
             delete_btn.onclick=ss;
             delete_btn.type='submit'
             delete_btn.textContent='delete';
+            delete_btn.setAttribute('data-id', res.data._id);
             
             newli.textContent = `name is ${res.name1} and email is ${res.email1} and phone is ${res.phone}`;
             
@@ -69,14 +70,22 @@ function ss(e)//to delete file
 {   
     
     e.preventDefault()
-    let item=e.target.parentElement
-    let newobj = item.cloneNode(true); // clone the li element to remove the delete button
-    newobj.removeChild(newobj.lastChild)
-    let dl=JSON.parse(newobj.textContent)
-    console.log(dl);
-    item.remove()
-    localStorage.removeItem(dl.email)
+    id=e.target.getAttribute('data-id')
+    axios.delete(`https://crudcrud.com/api/49a5697aa0584c5c9963fa21d697dd25/db/${id}`)
+    .then((res)=>{
+        console.log('item deleted');
+        item=e.target.parentElement
+        item.remove()
+    })
+   
+    
 }
+  
+    
+   
+    
+     
+ 
 
 function ll(e)//to update element
 {
@@ -120,6 +129,7 @@ function ll(e)//to update element
                     delete_btn.onclick=ss;
                     delete_btn.type='submit'
                     delete_btn.textContent='delete';
+                    delete_btn.setAttribute('data-id', response.data[i]._id);
                     
                     newli.textContent = `name is ${response.data[i].name1} and email is ${response.data[i].email1} and phone is ${response.data[i].phone}`;
                     
